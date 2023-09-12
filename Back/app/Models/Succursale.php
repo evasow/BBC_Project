@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Succursale extends Model
 {
     use HasFactory;
+
+   protected $guarded=[];
+   protected $hidden=[
+    'updated_at',
+    'created_at'
+   ];
 }
