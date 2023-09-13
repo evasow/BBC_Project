@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Caracteristiques::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Produit::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Unite::class)->constrained()->cascadeOnDelete();
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

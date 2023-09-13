@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('libelle');
             $table->string('code');
             $table->string('description');
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

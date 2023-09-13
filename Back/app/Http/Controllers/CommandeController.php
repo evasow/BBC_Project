@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CommandeCollection;
+use App\Http\Resources\CommandeResource;
 use App\Models\Commande;
 use Illuminate\Http\Request;
 
@@ -12,15 +14,8 @@ class CommandeController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $limit=3;
+        return new CommandeCollection(Commande::paginate($limit));
     }
 
     /**
@@ -28,7 +23,14 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $commande= commande::firstOrCreate([
+            'date_commande' => $request->date_commande,
+            'reduction'=>$request->	reduction,
+            'user_id'=>$request->user_id,
+            'client_id'=>$request->	client_id,
+        ]);
+        
+        return new CommandeResource('commande ajouté avec succès !',$commande);
     }
 
     /**
@@ -38,15 +40,6 @@ class CommandeController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Commande $commande)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      */

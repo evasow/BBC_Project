@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('prix');
             $table->float('quantite');
-            $table->integer('reduction');
+            $table->integer('reduction')->nullable();
             $table->foreignIdFor(Commande::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(ProduitSuccursale::class)->constrained()->cascadeOnDelete();
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

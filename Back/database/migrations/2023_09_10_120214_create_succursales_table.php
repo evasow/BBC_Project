@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nom');
             $table->string('tel');
             $table->string('adresse');
-            $table->integer('reduction');
+            $table->integer('reduction')->nullable();
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

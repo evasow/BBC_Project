@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('amis', function (Blueprint $table) {
             $table->id();
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

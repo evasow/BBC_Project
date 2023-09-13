@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('date');
             $table->bigInteger('montant');
             $table->foreignIdFor(Commande::class)->constrained()->cascadeOnDelete();
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,23 +15,37 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $limit=3;
+        return new UserCollection(User::paginate($limit));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user= User::firstOrCreate([
+            'nomComplet' => $request->nomComplet,
+            'login'=>$request->login,
+            'password'=>$request->password,
+            'succursale_id'=>$request->succursale_id
+        ]);
+        
+        return new UserResource('User ajouté avec succès !',$user);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($user)
     {
-        //
+        $data=User::where('nomComplet',$user)->first();
+        if ($data) {
+            return new UserResource('',$data);
+        }
+        else{
+            return new UserResource('Ce User n\'existe pas !');
+        }
     }
 
     /**
@@ -36,7 +53,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->update($request->only('nomComplet','	login','password'));
+        return new UserResource('User modifié avec succés !',$user);
     }
 
     /**
@@ -44,6 +62,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return new UserResource('User supprimé avec succés !',$user);
     }
 }

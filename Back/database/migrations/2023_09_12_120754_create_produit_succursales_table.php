@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('prix_gros');
             $table->foreignIdFor(Produit::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Succursale::class)->constrained()->cascadeOnDelete();
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

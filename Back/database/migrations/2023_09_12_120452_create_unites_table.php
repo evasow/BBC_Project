@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('unites', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

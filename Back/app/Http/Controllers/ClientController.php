@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ClientCollection;
+use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -12,15 +14,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $limit=3;
+        return new ClientCollection(Client::paginate($limit));
     }
 
     /**
@@ -28,25 +23,26 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client= Client::firstOrCreate([
+            'nomComplet' => $request->nomComplet,
+            'adresse'=>$request->adresse
+        ]);
+        
+        return new ClientResource('Client ajouté avec succès !',$client);
     }
-
     /**
      * Display the specified resource.
      */
-    public function show(Client $client)
+    public function show($client)
     {
-        //
+        $data=Client::where('nomComplet',$client)->first();
+        if ($data) {
+            return new ClientResource('',$data);
+        }
+        else{
+            return new ClientResource('Ce Client n\'existe pas !');
+        }
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Client $client)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      */
@@ -60,6 +56,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return new ClientResource('Client supprimé avec succés !',$client);
     }
 }

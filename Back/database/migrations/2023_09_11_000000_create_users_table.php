@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('login')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
             $table->foreignIdFor(Succursale::class)->constrained()->cascadeOnDelete();
+            $table->date('deleted_at')->nullable();
+            $table->timestamps();
+
         });
     }
 

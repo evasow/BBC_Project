@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProduitResource;
 use App\Models\produit;
 use Illuminate\Http\Request;
 
@@ -14,21 +15,18 @@ class ProduitController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $produit= Produit::firstOrCreate([
+            'libelle' => $request->libelle,
+            'code'=>$request->code,
+            'description'=>$request->description,
+        ]);
+        
+        return new ProduitResource('produit ajouté avec succès !',$produit);
     }
 
     /**
