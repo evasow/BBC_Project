@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ProduitResource;
-use App\Models\produit;
+use App\Models\Produit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProduitController extends Controller
 {
@@ -25,6 +26,8 @@ class ProduitController extends Controller
             'code'=>$request->code,
             'description'=>$request->description,
         ]);
+        $produit->succursales()->attach($request->succursaleProd);
+        $produit->caracteristiques()->attach($request->caracteristiques);
         
         return new ProduitResource('produit ajouté avec succès !',$produit);
     }
@@ -32,9 +35,15 @@ class ProduitController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(produit $produit)
+    public function show($produit)
     {
-        //
+        $data=Produit::where('code',$produit)->first();
+        if ($data) {
+            return new ProduitResource('',$data);
+        }
+        else{
+            return new ProduitResource('Ce succursale n\'existe pas !');
+        }
     }
 
     /**

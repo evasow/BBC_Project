@@ -2,7 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Response;
+use App\Rules\QuantiteProdRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CommandeRequest extends FormRequest
 {
@@ -11,7 +15,7 @@ class CommandeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +26,19 @@ class CommandeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'date_commande'=>'required|date',
+            'reduction'=>'',
+            'produits_succursale'=> new QuantiteProdRule
         ];
+    }
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json([
+                'message' => $validator->errors()->first(),
+                'data' => [],
+                'success' => Response::HTTP_OK
+            ])
+        );
     }
 }

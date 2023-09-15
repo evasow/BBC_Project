@@ -10,4 +10,10 @@ class Commande extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $guarded=[];
+
+    public function produits_succursale(){
+        return $this->belongsToMany(ProduitSuccursale::class,'produit_commandes');
+    }
 }

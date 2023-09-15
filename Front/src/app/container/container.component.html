@@ -1,0 +1,64 @@
+<div class="flex justify-between m-8 content-center items-center  " style="height: 85vh;">
+    <div class="border w-3/5 h-full rounded-lg shadow-xl bg-zinc-100">
+        <div class="m-8 h-1/5 flex justify-between">
+            <img class="h-auto max-w-xs" src="../../assets/img/image-removebg-preview (1).png" alt="image description">
+            <div class="flex justify-center items-center">
+                <p class="text-3xl text-gray-900 dark:text-white">Stock : 12</p>
+            </div>
+        </div>
+        <hr class="h-px m-8 bg-slate-400 border-0 dark:bg-gray-900">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-8">
+            <app-table-vente></app-table-vente>
+        </div>
+        <div>
+            <hr class="h-px m-8 bg-slate-400 border-0 dark:bg-gray-900">
+            <form class="flex">
+                <div class="flex m-8">
+                    <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-red-600 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button" >Remise</button>
+                    <div class="relative w-full">
+                        <input type="number" id="search-dropdown" class="block p-2.5 w-24 z-20 text-2xl text-red-600 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-red-600 placeholder:text-center" placeholder="0" >
+                    </div>
+                </div>
+                <div class="flex m-8">
+                    <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-green-500 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">MONTANT TOTAL</button>
+                    <div class="relative w-full">
+                        <input type="number" id="search-dropdown" class="block p-2.5 w-80 z-20 text-2xl text-green-500 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-green-500 placeholder:text-center" placeholder="0 FCFA" > 
+                    </div>
+                </div>
+                <div class="flex m-8">
+                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Suivant</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="w-2/5 h-full flex justify-around  m-8 content-center items-center flex-col bg-sky-100 rounded-lg shadow">
+        <div class=" flex justify-center items-center p-14 rounded-lg shadow-xl bg-zinc-300">    
+            <form class="flex items-center">   
+                <div class="relative w-full">
+                    <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ENTRER LA REFERENCE..." required>
+                </div>
+            </form>
+        </div>
+        <div class=""> 
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                
+                <a href="#">
+                    <img class="rounded-t-lg" src="https://www.iseepassword.fr/blog/wp-content/uploads/2022/08/macos.jpg" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

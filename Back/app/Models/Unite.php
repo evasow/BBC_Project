@@ -10,4 +10,6 @@ class Unite extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $guarded=[];
 }

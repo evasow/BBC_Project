@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CaracteristiquesResource;
 use App\Models\Caracteristiques;
 use Illuminate\Http\Request;
 
@@ -16,19 +17,14 @@ class CaracteristiquesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validate=$request->validate([
+            'libelle' =>'required|string|unique:caracteristiques',
+        ]);
+        return new CaracteristiquesResource('',Caracteristiques::firstOrCreate($validate));
     }
 
     /**

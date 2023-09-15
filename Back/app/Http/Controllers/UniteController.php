@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UNiteResource;
 use App\Models\Unite;
 use Illuminate\Http\Request;
 
@@ -16,19 +17,15 @@ class UniteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validate=$request->validate([
+            'libelle' =>'required|string|unique:unites',
+        ]);
+        return new UNiteResource('',Unite::firstOrCreate($validate));
+
     }
 
     /**

@@ -10,4 +10,6 @@ class Client extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $guarded=[];
 }

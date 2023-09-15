@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CommandeResource extends JsonResource
+class UNiteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

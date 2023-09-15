@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommandeRequest;
 use App\Http\Resources\CommandeCollection;
 use App\Http\Resources\CommandeResource;
 use App\Models\Commande;
+use App\Models\ProduitCommande;
+use App\Models\ProduitSuccursale;
 use Illuminate\Http\Request;
 
 class CommandeController extends Controller
@@ -21,15 +24,20 @@ class CommandeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommandeRequest $request)
     {
-        $commande= commande::firstOrCreate([
-            'date_commande' => $request->date_commande,
+
+        $commande= Commande::firstOrCreate([
+            'date_commande' => now(),
             'reduction'=>$request->	reduction,
             'user_id'=>$request->user_id,
             'client_id'=>$request->	client_id,
         ]);
-        
+        $commande->produits_succursale()->attach($request->produits_succursale);
+        foreach ($request->produits_succursale as $value) {
+            $produitSucc=ProduitSuccursale::where('id',$value['produit_succursale_id'])->first();
+            $produitSucc->update(['quantite_stock'=>$produitSucc->quantite_stock-$value['quantite']]);
+        }
         return new CommandeResource('commande ajouté avec succès !',$commande);
     }
 

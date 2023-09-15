@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProduitResource extends JsonResource
@@ -12,8 +13,18 @@ class ProduitResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+    public $message;
+    public function __construct($message, $resource=[]) {
+        $this->resource = $resource;
+        $this->message = $message;
+    }
+
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'message' => $this->message,
+            'data' => [$this->resource],
+            'statut'=>Response::HTTP_OK
+        ];
     }
 }

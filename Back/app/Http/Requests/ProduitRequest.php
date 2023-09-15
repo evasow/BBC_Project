@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Response;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ProduitRequest extends FormRequest
 {
@@ -11,7 +14,7 @@ class ProduitRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,5 +27,15 @@ class ProduitRequest extends FormRequest
         return [
             //
         ];
+    }
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json([
+                'message' => $validator->errors()->first(),
+                'data' => [],
+                'success' => Response::HTTP_OK
+            ])
+        );
     }
 }
