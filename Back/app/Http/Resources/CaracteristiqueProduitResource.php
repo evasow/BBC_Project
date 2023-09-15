@@ -3,24 +3,23 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CaracteristiquesResource extends JsonResource
+class CaracteristiqueProduitResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
- 
-
+    
     public function toArray(Request $request): array
     {
         return [
             "id"=>$this->id,
-            "libelle"=>$this->libelle,
+            "libelle"=> $this->caracteristiques->libelle,
+            "valeur"=>$this->valeur,
+            "unite"=>$this->unite->libelle
         ];
     }
-   
 }

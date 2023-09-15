@@ -23,8 +23,19 @@ class ProduitResource extends JsonResource
     {
         return [
             'message' => $this->message,
-            'data' => [$this->resource],
+            'data' => [$this->produitFormat($this->resource)],
             'statut'=>Response::HTTP_OK
+        ];
+    }
+    public function produitFormat($resource){
+        return [
+            "id" => $resource->id,
+            "libelle"=>$resource->libelle,
+            "code"=>$resource->code,
+            "description"=>$resource->description,
+            "photo"=>$resource->photo,
+            "caracteristiques"=> CaracteristiqueProduitResource::collection($resource->caracteristiques_prods),
+            "succursale"=>ProduitSuccursaleResource::collection($resource->produit_succursales),
         ];
     }
 }

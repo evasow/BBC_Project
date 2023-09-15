@@ -10,4 +10,13 @@ class CaracteristiquesProd extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function caracteristiques()
+    {
+        return $this->belongsTo(Caracteristiques::class);
+    }
+    public function unite()
+    {
+        return $this->belongsTo(Unite::class);
+    }
 }

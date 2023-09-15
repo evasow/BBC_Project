@@ -11,4 +11,9 @@ class ProduitSuccursale extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded=[];
+
+    public function succursale()
+    {
+        return $this->belongsTo(Succursale::class);
+    }
 }

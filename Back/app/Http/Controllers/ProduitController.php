@@ -31,7 +31,6 @@ class ProduitController extends Controller
         
         return new ProduitResource('produit ajouté avec succès !',$produit);
     }
-
     /**
      * Display the specified resource.
      */

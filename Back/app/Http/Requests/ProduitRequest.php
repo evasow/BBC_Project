@@ -25,7 +25,7 @@ class ProduitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            
         ];
     }
     protected function failedValidation(Validator $validator)

@@ -11,4 +11,9 @@ class Caracteristiques extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded=[];
+
+    public function caracteristiques_prods()
+    {
+        return $this->hasMany(CaracteristiquesProd::class);
+    }
 }
