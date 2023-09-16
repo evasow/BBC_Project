@@ -18,7 +18,7 @@ class ProduitSuccursaleResource extends JsonResource
             "quantite_stock"=>$this->quantite_stock,
             "prix_unitaire"=>$this->prix_unitaire,
             "prix_gros"=>$this->prix_gros,
-            "succursale_id"=>$this->succursale_id
+            "libelle"=>$this->succursale->nom
         ];
     }
 }

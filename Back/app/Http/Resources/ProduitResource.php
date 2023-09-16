@@ -14,7 +14,7 @@ class ProduitResource extends JsonResource
      * @return array<string, mixed>
      */
     public $message;
-    public function __construct($message, $resource=[]) {
+    public function __construct($message, $resource) {
         $this->resource = $resource;
         $this->message = $message;
     }
@@ -28,14 +28,19 @@ class ProduitResource extends JsonResource
         ];
     }
     public function produitFormat($resource){
-        return [
-            "id" => $resource->id,
-            "libelle"=>$resource->libelle,
-            "code"=>$resource->code,
-            "description"=>$resource->description,
-            "photo"=>$resource->photo,
-            "caracteristiques"=> CaracteristiqueProduitResource::collection($resource->caracteristiques_prods),
-            "succursale"=>ProduitSuccursaleResource::collection($resource->produit_succursales),
-        ];
+        if ($resource) {
+            return [
+                "id" => $resource->id,
+                "libelle"=>$resource->libelle,
+                "code"=>$resource->code,
+                "description"=>$resource->description,
+                "photo"=>$resource->photo,
+                "caracteristiques"=> CaracteristiqueProduitResource::collection($resource->caracteristiques_prods),
+                "succursales"=>ProduitSuccursaleResource::collection($resource->produit_succursales),
+            ];
+        }
+        else{
+            return ;
+        }
     }
 }

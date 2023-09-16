@@ -25,7 +25,9 @@ class ProduitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'caracteristiques_id'=>'unique:caracteristiques_prods',
+            'valeur'=>'unique:caracteristiques_prods',
+            'unite_id'=>'unique:caracteristiques_prods',
         ];
     }
     protected function failedValidation(Validator $validator)

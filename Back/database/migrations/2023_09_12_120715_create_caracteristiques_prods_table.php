@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('caracteristiques_prods', function (Blueprint $table) {
             $table->id();
-            $table->string('valeur');
+            $table->string('valeur')->unique();
             $table->foreignIdFor(Caracteristiques::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Produit::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Unite::class)->constrained()->cascadeOnDelete();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProduitRequest;
 use App\Http\Resources\ProduitResource;
 use App\Models\Produit;
 use Illuminate\Http\Request;
@@ -19,17 +20,23 @@ class ProduitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProduitRequest $request)
     {
-        $produit= Produit::firstOrCreate([
-            'libelle' => $request->libelle,
-            'code'=>$request->code,
-            'description'=>$request->description,
-        ]);
-        $produit->succursales()->attach($request->succursaleProd);
-        $produit->caracteristiques()->attach($request->caracteristiques);
-        
-        return new ProduitResource('produit ajouté avec succès !',$produit);
+
+        return DB::transaction(function () use ($request){
+            $produit= Produit::firstOrCreate([
+                'libelle' => $request->libelle,
+                'code'=>$request->code,
+                'description'=>$request->description,
+                'photo'=>$request->photo
+            ]);
+    
+            $produit->succursales()->attach($request->succursaleProd);
+    
+            $produit->caracteristiques()->attach($request->caracteristiques);
+            
+            return new ProduitResource('produit ajouté avec succès !',$produit);
+        });
     }
     /**
      * Display the specified resource.
@@ -41,18 +48,9 @@ class ProduitController extends Controller
             return new ProduitResource('',$data);
         }
         else{
-            return new ProduitResource('Ce succursale n\'existe pas !');
+            return new ProduitResource('Ce succursale n\'existe pas !',[]);
         }
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(produit $produit)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      */
@@ -66,6 +64,7 @@ class ProduitController extends Controller
      */
     public function destroy(produit $produit)
     {
-        //
+        $produit->delete();
+        return new ProduitResource('',$produit);
     }
 }
