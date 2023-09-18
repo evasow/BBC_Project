@@ -1,28 +1,30 @@
-<div class="flex justify-between m-8 content-center items-center  " style="height: 85vh;">
+<app-nav-bar [succursale]="succursale" ></app-nav-bar>
+
+<div class="flex justify-between m-8 content-center items-center" style="height: 85vh;">
     <div class="border w-3/5 h-full rounded-lg shadow-xl bg-zinc-100">
         <div class="m-8 h-1/5 flex justify-between">
             <img class="h-auto max-w-xs" src="../../assets/img/image-removebg-preview (1).png" alt="image description">
             <div class="flex justify-center items-center">
-                <p class="text-3xl text-gray-900 dark:text-white">Stock : 12</p>
+                <p class="text-3xl text-gray-900 dark:text-white">Stock : {{produitOfSuccursale.quantite_stock}}</p>
             </div>
         </div>
         <hr class="h-px m-8 bg-slate-400 border-0 dark:bg-gray-900">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-8">
-            <app-table-vente></app-table-vente>
+        <div class="relative scroll h-72 overflow-y-auto shadow-md sm:rounded-lg m-8">
+            <app-table-vente [infosVente]="infosVente" [produitVente]="produitVente"></app-table-vente>
         </div>
-        <div class="">
-            <hr class="h-px m-8 bg-slate-400 border-0 dark:bg-gray-900">
+        <hr class="h-px m-8 bg-slate-400 border-0 dark:bg-gray-900">
+        <div class="fixed bottom-12">
             <form class="flex">
                 <div class="flex m-8">
-                    <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-red-600 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button" >Remise</button>
+                    <button class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-red-600 border border-gray-300 rounded-l-lg     focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button" >Remise</button>
                     <div class="relative w-full">
-                        <input type="number" id="search-dropdown" class="block p-2.5 w-24 z-20 text-2xl text-red-600 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-red-600 placeholder:text-center" placeholder="0" >
+                        <input type="number" class="text-center block p-2.5 w-24 z-20 text-2xl text-red-600 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-red-600 placeholder:text-center" placeholder="0" >
                     </div>
                 </div>
                 <div class="flex m-8">
-                    <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-green-500 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">MONTANT TOTAL</button>
+                    <button class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-green-500 border border-gray-300 rounded-l-lg       focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">MONTANT TOTAL</button>
                     <div class="relative w-full">
-                        <input type="number" id="search-dropdown" class="block p-2.5 w-80 z-20 text-2xl text-green-500 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-green-500 placeholder:text-center" placeholder="0 FCFA" > 
+                        <input type="number" class="text-center block p-2.5 w-80 z-20 text-2xl text-green-500 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-green-500 placeholder:text-center" placeholder="0 FCFA" > 
                     </div>
                 </div>
                 <div class="flex m-8">
@@ -35,7 +37,7 @@
         <div class=" flex justify-center items-center p-14 rounded-lg shadow-xl bg-zinc-300">    
             <form class="flex items-center">   
                 <div class="relative w-full">
-                    <input type="text" id="simple-search"  (input)="searchProduitByCode($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:text-center text-center" placeholder="ENTRER LA REFERENCE..." required>
+                    <input type="number" id="simple-search"  (input)="searchProduitByCode($event)" class="text-center bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:text-center" placeholder="REFERENCE" required>
                 </div>
             </form>
         </div>
@@ -63,28 +65,41 @@
                 </div>
                 <span class="sr-only">Loading...</span>
             </div>
-            
-   
 
             <div  *ngIf="!nonProduit" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 
-                <a href="#">
-                    <img class="rounded-t-lg" src="https://www.iseepassword.fr/blog/wp-content/uploads/2022/08/macos.jpg" alt="" />
-                </a>
+                
+                    <img class="rounded-t-lg" src="{{produitVente.photo}}" alt="" />
+               
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{produitVente.libelle}}</h5>
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Read more
-                        <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                        </svg>
-                    </a>
+                    <!-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{produitVente.description}}</p> -->
+
+                    <ul  class="space-y-4 text-left text-gray-500 dark:text-gray-400">
+                        <li *ngFor="let car of produitVente.caracteristiques" class="flex items-center space-x-3">
+                            <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                            </svg>
+                            <span>{{car.libelle}}: <span class="font-semibold text-gray-900 dark:text-white">{{car.valeur}} {{car.unite}}</span></span>
+                        </li>
+                    </ul>
+                    <div class="flex justify-end">
+                        <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"  class=" cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Ajouter
+                            <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+<app-modal-vente [produitOfSuccursale]="produitOfSuccursale" (produitSender)="ajouterProduit($event)"></app-modal-vente>
+
+
+
