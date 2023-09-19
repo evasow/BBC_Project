@@ -4,6 +4,7 @@ import { ProduitLoad } from '../shared/interface/produit-load';
 import { environment } from 'src/environments/environment.development';
 import { Succursale } from '../shared/interface/succursale';
 import { InfosVente } from '../shared/interface/infos-vente';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-container',
@@ -17,7 +18,15 @@ export class ContainerComponent {
   produitOfSuccursale!:Succursale
   infosVente!:InfosVente[]
   succursale:string ="BBC colobane";
-    constructor(private produitService:ProduitVenteService){}
+
+  
+
+    constructor(private produitService:ProduitVenteService, private fb:FormBuilder){}
+
+    formTotalMontant=this.fb.group({
+      remise:[],
+      montant_total:[{value:0, disabled :true}]
+    })
 
     ngOnInit(){
       this.produitVente=environment.defaulProduit;
@@ -52,8 +61,13 @@ export class ContainerComponent {
     }
     ajouterProduit(produit:InfosVente[])
     {
+      
       console.log(produit);
       this.infosVente=produit; 
+    }
+    validerMontant(){
+      console.log(this.formTotalMontant);
+      
     }
 
 }

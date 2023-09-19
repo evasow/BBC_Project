@@ -11,6 +11,8 @@ import { TableVenteComponent } from './container/table-vente/table-vente.compone
 import { ProduitVenteComponent } from './produit-vente/produit-vente.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
 import { ModalVenteComponent } from './container/modal-vente/modal-vente.component';
+import { ModalSuivantComponent } from './container/modal-suivant/modal-suivant.component';
+import { ModalTerminerVenteComponent } from './container/modal-terminer-vente/modal-terminer-vente.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { ModalVenteComponent } from './container/modal-vente/modal-vente.compone
     TableVenteComponent,
     ProduitVenteComponent,
     DashbordComponent,
-    ModalVenteComponent
+    ModalVenteComponent,
+    ModalSuivantComponent,
+    ModalTerminerVenteComponent
   ],
   imports: [
     BrowserModule,

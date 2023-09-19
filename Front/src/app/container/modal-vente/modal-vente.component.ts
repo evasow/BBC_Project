@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Succursale } from '../../shared/interface/succursale';
 import { InfosVente } from 'src/app/shared/interface/infos-vente';
+import { ProduitLoad } from 'src/app/shared/interface/produit-load';
 
 @Component({
   selector: 'app-modal-vente',
@@ -11,17 +12,18 @@ import { InfosVente } from 'src/app/shared/interface/infos-vente';
 export class ModalVenteComponent {
   // formInfosVente!:FormGroup;
   mntValide:boolean = false;
-  benMontant:boolean = false;
+
   tabInfVente:InfosVente[]=[]
 
   @Input() produitOfSuccursale!:Succursale
-
+  @Input() produitVente!:ProduitLoad;
   @Output() produitSender=new EventEmitter<InfosVente[]>();
   constructor (private fb:FormBuilder){}
 
   formInfosVente = this.fb.group({
     montant:[0,[Validators.required]],
-    quantite:[0,[Validators.required]]
+    quantite:[0,[Validators.required]],
+    produit:[""]
 
   })
 
@@ -57,9 +59,15 @@ export class ModalVenteComponent {
   }
   ajouterProduit(){
     
+    this.formInfosVente.get('produit')?.setValue(this.produitVente.libelle)
     let infVal=this.formInfosVente.value as InfosVente
+    console.log(this.produitVente);
+    console.log(this.formInfosVente.get('produit')?.value);
+    
+    
     this.tabInfVente.push(infVal);
     this.produitSender.emit(this.tabInfVente)
+    console.log(infVal);
     // this.formInfosVente.reset();
     
     

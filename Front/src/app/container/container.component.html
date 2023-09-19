@@ -14,21 +14,21 @@
         </div>
         <hr class="h-px m-8 bg-slate-400 border-0 dark:bg-gray-900">
         <div class="fixed bottom-12">
-            <form class="flex">
+            <form class="flex" [formGroup]="formTotalMontant" (submit)="validerMontant">
                 <div class="flex m-8">
                     <button class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-red-600 border border-gray-300 rounded-l-lg     focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button" >Remise</button>
                     <div class="relative w-full">
-                        <input type="number" class="text-center block p-2.5 w-24 z-20 text-2xl text-red-600 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-red-600 placeholder:text-center" placeholder="0" >
+                        <input formControlName="remise" type="number" class="text-center block p-2.5 w-24 z-20 text-2xl text-red-600 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-red-600 placeholder:text-center" placeholder="0" >
                     </div>
                 </div>
                 <div class="flex m-8">
                     <button class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-green-500 border border-gray-300 rounded-l-lg       focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">MONTANT TOTAL</button>
                     <div class="relative w-full">
-                        <input type="number" class="text-center block p-2.5 w-80 z-20 text-2xl text-green-500 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-green-500 placeholder:text-center" placeholder="0 FCFA" > 
+                        <input formControlName="montant_total"  type="number" id="disabled-input" aria-label="disabled input" class="text-center block p-2.5 w-80 z-20 text-2xl text-green-500 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-green-500 placeholder:text-center" placeholder="0 FCFA" > 
                     </div>
                 </div>
                 <div class="flex m-8">
-                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Suivant</button>
+                    <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Suivant</button>
                 </div>
             </form>
         </div>
@@ -99,7 +99,7 @@
         </div>
     </div>
 </div>
-<app-modal-vente [produitOfSuccursale]="produitOfSuccursale" (produitSender)="ajouterProduit($event)"></app-modal-vente>
-
+<app-modal-vente [produitVente]="produitVente" [produitOfSuccursale]="produitOfSuccursale" (produitSender)="ajouterProduit($event)" ></app-modal-vente>
+<app-modal-suivant></app-modal-suivant>
 
 
