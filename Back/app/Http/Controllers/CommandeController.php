@@ -6,7 +6,6 @@ use App\Http\Requests\CommandeRequest;
 use App\Http\Resources\CommandeCollection;
 use App\Http\Resources\CommandeResource;
 use App\Models\Commande;
-use App\Models\ProduitCommande;
 use App\Models\ProduitSuccursale;
 use Illuminate\Http\Request;
 
@@ -26,7 +25,6 @@ class CommandeController extends Controller
      */
     public function store(CommandeRequest $request)
     {
-
         $commande= Commande::firstOrCreate([
             'date_commande' => now(),
             'reduction'=>$request->	reduction,

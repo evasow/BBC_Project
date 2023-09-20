@@ -23,7 +23,8 @@ export class ModalVenteComponent {
   formInfosVente = this.fb.group({
     montant:[0,[Validators.required]],
     quantite:[0,[Validators.required]],
-    produit:[""]
+    produit:[""],
+    produit_succursale_id:[0]
 
   })
 
@@ -60,16 +61,15 @@ export class ModalVenteComponent {
   ajouterProduit(){
     
     this.formInfosVente.get('produit')?.setValue(this.produitVente.libelle)
+    this.formInfosVente.get('produit_succursale_id')?.setValue(this.produitVente.id!)
+
     let infVal=this.formInfosVente.value as InfosVente
     console.log(this.produitVente);
-    console.log(this.formInfosVente.get('produit')?.value);
-    
+    // console.log(this.formInfosVente.get('produit')?.value);
     
     this.tabInfVente.push(infVal);
     this.produitSender.emit(this.tabInfVente)
     console.log(infVal);
-    // this.formInfosVente.reset();
-    
-    
+ 
   }
 }

@@ -18,6 +18,7 @@ export class ContainerComponent {
   produitOfSuccursale!:Succursale
   infosVente!:InfosVente[]
   succursale:string ="BBC colobane";
+  montantTotal:number =0
 
   
 
@@ -59,15 +60,27 @@ export class ContainerComponent {
 
         return tab.filter(data =>data.libelle==libelle)[0]
     }
+    calculMontantTotal(tab:InfosVente[]){
+      return tab.reduce((acc,value)=>{
+        return acc + (value.montant*value.quantite);
+      },0)
+    }
     ajouterProduit(produit:InfosVente[])
     {
-      
-      console.log(produit);
       this.infosVente=produit; 
+      
+      this.formTotalMontant.get('montant_total')?.setValue(this.calculMontantTotal(this.infosVente))
+      console.log(produit);
+      this.montantTotal=this.formTotalMontant.get('montant_total')?.value!;
     }
     validerMontant(){
       console.log(this.formTotalMontant);
       
+      
     }
-
+    setMontantTotal(montant:number){
+        console.log(montant);
+        
+    }
+      
 }

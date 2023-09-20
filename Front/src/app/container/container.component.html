@@ -10,7 +10,11 @@
         </div>
         <hr class="h-px m-8 bg-slate-400 border-0 dark:bg-gray-900">
         <div class="relative scroll h-72 overflow-y-auto shadow-md sm:rounded-lg m-8">
-            <app-table-vente [infosVente]="infosVente" [produitVente]="produitVente"></app-table-vente>
+            <app-table-vente [infosVente]="infosVente"
+             [produitVente]="produitVente"
+             (montantTotal)="setMontantTotal($event)">
+
+            </app-table-vente>
         </div>
         <hr class="h-px m-8 bg-slate-400 border-0 dark:bg-gray-900">
         <div class="fixed bottom-12">
@@ -100,6 +104,6 @@
     </div>
 </div>
 <app-modal-vente [produitVente]="produitVente" [produitOfSuccursale]="produitOfSuccursale" (produitSender)="ajouterProduit($event)" ></app-modal-vente>
-<app-modal-suivant></app-modal-suivant>
+<app-modal-suivant [montantTotal]="montantTotal"></app-modal-suivant>
 
 
