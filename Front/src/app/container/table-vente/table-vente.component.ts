@@ -26,7 +26,7 @@ constructor(private fb:FormBuilder){}
 
   updateMontantTotal(event:Event, item:InfosVente){
     let input=event.target as HTMLInputElement
-    this.totalMontant= +input.value*item.montant
+    this.totalMontant= +input.value*item.prix
   }
 
   removeInfVente(item:InfosVente){

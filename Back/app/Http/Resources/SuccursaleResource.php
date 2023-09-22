@@ -13,18 +13,16 @@ class SuccursaleResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public $message;
-    public function __construct($message, $resource=[]) {
-        $this->resource = $resource;
-        $this->message = $message;
-    }
 
     public function toArray(Request $request): array
     {
         return [
-            'message' => $this->message,
-            'data' => [$this->resource],
-            'statut'=>Response::HTTP_OK
+            'nom' => $this->nom,
+            'tel' => $this->tel,
+            'adresse'=>$this->adresse,
+            'quantite_stock'=>$this->pivot->quantite_stock,
+            'prix_unitaire'=>$this->pivot->prix_unitaire,
+            'prix_gros'=>$this->pivot->prix_gros,
         ];
     }
 }

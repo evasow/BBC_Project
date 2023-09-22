@@ -26,7 +26,7 @@ export abstract class RestFullService <T> {
   update(body: {}, id: number, url: string = this.url): Observable<Data<T>> {
     return this.http.put<Data<T>>(url + "/" + id, body);
   }
-  search(val:string,url: string = this.url): Observable<Data<T>> {
-    return this.http.get<Data<T>>(url + "/" + val);
+  search(url: string = this.url): Observable<Data<T>> {
+    return this.http.get<Data<T>>(url);
   }
 }

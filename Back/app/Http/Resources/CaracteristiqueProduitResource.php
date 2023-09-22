@@ -17,9 +17,9 @@ class CaracteristiqueProduitResource extends JsonResource
     {
         return [
             "id"=>$this->id,
-            "libelle"=> $this->caracteristiques->libelle,
-            "valeur"=>$this->valeur,
-            "unite"=>$this->unite->libelle
+            "libelle"=> $this->libelle,
+            "valeur"=>$this->pivot->valeur,
+            "unite"=>$this->unite
         ];
     }
 }

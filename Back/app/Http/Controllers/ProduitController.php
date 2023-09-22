@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProduitRequest;
-use App\Http\Resources\ProduitResource;
 use App\Models\Produit;
+use App\Models\Succursale;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ProduitRequest;
+use App\Http\Resources\ProduitCollection;
+use App\Http\Resources\ProduitResource;
+use App\Models\ProduitSuccursale;
 
 class ProduitController extends Controller
 {
@@ -41,15 +45,41 @@ class ProduitController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($produit)
+    public function show($code)
     {
-        $data=Produit::where('code',$produit)->first();
+        $data=Produit::where('code',$code)->first();
         if ($data) {
             return new ProduitResource('',$data);
         }
         else{
             return new ProduitResource('Ce succursale n\'existe pas !',[]);
         }
+    }
+    public function searchProduct($code, $succ){
+        $produit = Produit::where("code", $code)->first();
+        if (!$produit) {
+            return new ProduitResource("code introuvable !",[]);
+        }
+        $hisProduit = ProduitSuccursale::where(
+            ['succursale_id' => $succ, "produit_id" => $produit->id])
+              ->where('quantite_stock', '>', 0)->first();
+              
+        if (!$hisProduit) {
+            $ids = Succursale::myFriends($succ)->pluck("to_succ");
+
+            $produit = Produit::with(['succursales' => function ($q) use ($ids) {
+                $q->whereIn('succursale_id', $ids)
+                ->where('quantite_stock', ">", 0)->orderBy('prix_gros', "asc");
+
+            }, 'caracteristiques'])->where('code', $code)->first();
+
+                return new ProduitResource('',[$produit]);
+            // $produit = Produit::quantitePositive($ids, $code)->first();
+        }
+        $produit = Produit::with(['succursales' => function ($q) use ($succ) {
+            $q->where('succursale_id', $succ);
+        }, 'caracteristiques'])->where('code', $code)->first();
+        return new ProduitResource('',[$produit]) ;
     }
     /**
      * Update the specified resource in storage.

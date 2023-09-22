@@ -21,7 +21,7 @@ export class ModalVenteComponent {
   constructor (private fb:FormBuilder){}
 
   formInfosVente = this.fb.group({
-    montant:[0,[Validators.required]],
+    prix:[0,[Validators.required]],
     quantite:[0,[Validators.required]],
     produit:[""],
     produit_succursale_id:[0]
@@ -29,7 +29,7 @@ export class ModalVenteComponent {
   })
 
   validerMontant(){
-    let montant=this.formInfosVente.get('montant')?.value
+    let montant=this.formInfosVente.get('prix')?.value
     if (montant! < this.produitOfSuccursale.prix_unitaire)
     {
       this.mntValide=true
@@ -40,7 +40,7 @@ export class ModalVenteComponent {
     }
   }
   getColor(){
-    let montant=this.formInfosVente.get('montant')?.value
+    let montant=this.formInfosVente.get('prix')?.value
     if (montant==0 || montant==this.produitOfSuccursale.prix_unitaire) {
       return {
         "bg-sky-200":true
@@ -65,7 +65,6 @@ export class ModalVenteComponent {
 
     let infVal=this.formInfosVente.value as InfosVente
     console.log(this.produitVente);
-    // console.log(this.formInfosVente.get('produit')?.value);
     
     this.tabInfVente.push(infVal);
     this.produitSender.emit(this.tabInfVente)

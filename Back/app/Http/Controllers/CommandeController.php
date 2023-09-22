@@ -31,8 +31,14 @@ class CommandeController extends Controller
             'user_id'=>$request->user_id,
             'client_id'=>$request->	client_id,
         ]);
-        $commande->produits_succursale()->attach($request->produits_succursale);
-        foreach ($request->produits_succursale as $value) {
+        $produits_succursale=array_map(function($object){
+            unset($object['produit']);
+            return $object;
+        },$request->produits_succursale);
+
+        $commande->produits_succursale()->attach($produits_succursale);
+
+        foreach ($produits_succursale as $value) {
             $produitSucc=ProduitSuccursale::where('id',$value['produit_succursale_id'])->first();
             $produitSucc->update(['quantite_stock'=>$produitSucc->quantite_stock-$value['quantite']]);
         }

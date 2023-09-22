@@ -19,7 +19,7 @@ export const environment = {
         ]
     },
     "produitOfSuccursale":{
-        "libelle": "BBC colobane",
+        "nom": "BBC colobane",
         "prix_gros":1000000,
         "prix_unitaire" :100000,
         "quantite_stock":0,

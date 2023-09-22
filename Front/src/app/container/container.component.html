@@ -5,7 +5,7 @@
         <div class="m-8 h-1/5 flex justify-between">
             <img class="h-auto max-w-xs" src="../../assets/img/image-removebg-preview (1).png" alt="image description">
             <div class="flex justify-center items-center">
-                <p class="text-3xl text-gray-900 dark:text-white">Stock : {{produitOfSuccursale.quantite_stock}}</p>
+                <p class="text-3xl text-gray-900 dark:text-white">Stock :</p>
             </div>
         </div>
         <hr class="h-px m-8 bg-slate-400 border-0 dark:bg-gray-900">
@@ -47,7 +47,7 @@
         </div>
         <div class=""> 
 
-            <div role="status" *ngIf="nonProduit" class="max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700">
+            <div role="status" *ngIf="!produitVente" class="max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700">
                 <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700">
                     <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
                         <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
@@ -71,17 +71,16 @@
             </div>
 
             <div  *ngIf="!nonProduit" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                
-                
-                    <img class="rounded-t-lg" src="{{produitVente.photo}}" alt="" />
+                <img  src="{{produitVente.photo}}" alt="" />
+                <span *ngIf="produitVente.succursales?.length!==1" class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-700 relative inline-block">
+                    <span class="relative text-white">rupture de stock</span>
+                </span>
                
                 <div class="p-5">
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{produitVente.libelle}}</h5>
                     </a>
-                    <!-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{produitVente.description}}</p> -->
-
-                    <ul  class="space-y-4 text-left text-gray-500 dark:text-gray-400">
+                    <ul  class="space-y-4 scroll overflow-y-auto h-[5em] text-left text-gray-500 dark:text-gray-400">
                         <li *ngFor="let car of produitVente.caracteristiques" class="flex items-center space-x-3">
                             <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -89,8 +88,8 @@
                             <span>{{car.libelle}}: <span class="font-semibold text-gray-900 dark:text-white">{{car.valeur}} {{car.unite}}</span></span>
                         </li>
                     </ul>
-                    <div class="flex justify-end">
-                        <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"  class=" cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <div class="flex justify-end" [class.hidden]="produitVente.succursales?.length!=1">
+                        <button  data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"  class=" cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Ajouter
                             <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -99,11 +98,19 @@
                     </div>
                 </div>
             </div>
-
+            <div class="mt-5 scroll h-24 overflow-y-auto grid grid-cols-2 gap-2"*ngIf="!(produitVente.succursales?.length==1 && produitVente.succursales![0].quantite_stock!==0)">
+                <button *ngFor="let succ of produitVente.succursales" href="#" class="block max-w-[10em] p-2 text-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h6 class="mb-1 text-sm font-bold tracking-tight text-gray-900 dark:text-white">{{succ.nom}}</h6>
+                    <div>
+                        <span class=" text-xs font-bold tracking-tight text-gray-500 dark:text-white">quantite : <span class="text-gray-900">{{succ.quantite_stock}}</span></span><br>
+                        <span class=" text-xs font-bold tracking-tight text-gray-500  dark:text-white">prix : <span class="text-gray-900">{{succ.prix_unitaire}} FCFA</span></span>
+                    </div>
+                </button>
+            </div>
         </div>
     </div>
 </div>
 <app-modal-vente [produitVente]="produitVente" [produitOfSuccursale]="produitOfSuccursale" (produitSender)="ajouterProduit($event)" ></app-modal-vente>
-<app-modal-suivant [montantTotal]="montantTotal"></app-modal-suivant>
+<app-modal-suivant (venteSender)="ajouterCommande($event)" [infosVente]="infosVente" [montantTotal]="montantTotal"></app-modal-suivant>
 
 

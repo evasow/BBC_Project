@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProduitCollection extends ResourceCollection
@@ -12,8 +13,16 @@ class ProduitCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
+    public function __construct($collection){
+        $this->collection=$collection;
+    }
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'message' => '',
+            'data' => $this->collection->toArray()['data'],
+            'statut'=>Response::HTTP_OK,
+            'links' => $this->collection->toArray()['links']
+        ];
     }
 }

@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Commande } from 'src/app/shared/interface/commande';
+import { InfosVente } from 'src/app/shared/interface/infos-vente';
 
 @Component({
   selector: 'app-modal-terminer-vente',
@@ -7,7 +9,11 @@ import { Component, Input } from '@angular/core';
 })
 export class ModalTerminerVenteComponent {
   @Input() montantTotal!: number;
+  @Input() infosVente!: InfosVente[];
+  @Output() venteSender=new EventEmitter<Commande>();
+
   montantRendu: number=0;
+  formData= new FormData();
 
   montantEncaisse(event: Event){
     let input = event.target as HTMLInputElement;
@@ -17,5 +23,15 @@ export class ModalTerminerVenteComponent {
     else{
       this.montantRendu=0
     }
+  }
+  terminerVente(){
+    let obj:Commande={
+      "user_id":1,
+      "client_id":1,
+      "produits_succursale":this.infosVente
+    }
+    this.venteSender.emit(obj);
+    console.log(obj); 
+    
   }
 }

@@ -23,10 +23,12 @@ class Produit extends Model
     }
     public function caracteristiques()
     {
-        return $this->belongsToMany(Caracteristiques::class,'caracteristiques_prods');
+        return $this->belongsToMany(Caracteristiques::class,'caracteristiques_prods')
+                    ->withPivot('valeur','unite_id','caracteristiques_id ');
     }
     public function succursales()
     {
-        return $this->belongsToMany(Succursale::class,'produit_succursales');
+        return $this->belongsToMany(Succursale::class,'produit_succursales')
+                    ->withPivot('quantite_stock','prix_unitaire','prix_gros');
     }
 }

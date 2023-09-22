@@ -26,7 +26,7 @@ class CommandeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date_commande'=>'required|date',
+            'date_commande'=>'date',
             'reduction'=>'',
             'produits_succursale'=> new QuantiteProdRule
         ];

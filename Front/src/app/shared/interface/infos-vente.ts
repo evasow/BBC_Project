@@ -1,5 +1,5 @@
 export interface InfosVente {
-    montant: number;
+    prix: number;
     quantite: number;
     montant_total?: number;
     produit?: string;

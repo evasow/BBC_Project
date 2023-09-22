@@ -17,6 +17,6 @@ class CaracteristiquesProd extends Model
     }
     public function unite()
     {
-        return $this->belongsTo(Unite::class);
+        return $this->belongsTo(Unite::class,'unite_id');
     }
 }
