@@ -1,29 +1,26 @@
-import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Succursale } from '../../shared/interface/succursale';
-import { InfosVente } from 'src/app/shared/interface/infos-vente';
-import { ProduitLoad } from 'src/app/shared/interface/produit-load';
+import { InfosVente } from '../shared/interface/infos-vente';
+import { ProduitLoad } from '../shared/interface/produit-load';
+import { Succursale } from '../shared/interface/succursale';
 
 @Component({
-  selector: 'app-modal-vente',
-  templateUrl: './modal-vente.component.html',
-  styleUrls: ['./modal-vente.component.css']
+  selector: 'app-modal-vente-other',
+  templateUrl: './modal-vente-other.component.html',
+  styleUrls: ['./modal-vente-other.component.css']
 })
-export class ModalVenteComponent {
-  // formInfosVente!:FormGroup;
-  mntValide:boolean = false;
+export class ModalVenteOtherComponent {
+    // formInfosVente!:FormGroup;
+    mntValide:boolean = false;
 
-  tabInfVente:InfosVente[]=[]
-  @ViewChild('modalVente') modalVente! : ElementRef
-  modalElement = this.modalVente.nativeElement; 
-
-
-
-  @Input() produitOfSuccursale!:Succursale
-  @Input() produitVente!:ProduitLoad;
-  @Output() produitSender=new EventEmitter<InfosVente[]>();
-  constructor (private fb:FormBuilder){}
+    tabInfVente:InfosVente[]=[]
   
+    @Input() produitOfSuccursale!:Succursale
+    @Input() produitVente!:ProduitLoad;
+    @Output() produitSender=new EventEmitter<InfosVente[]>();
+    constructor (private fb:FormBuilder){}
+
+
   formInfosVente = this.fb.group({
     prix:[0,[Validators.required]],
     quantite:[0,[Validators.required]],
@@ -78,7 +75,3 @@ export class ModalVenteComponent {
  
   }
 }
-function ViewChild(arg0: string): (target: ModalVenteComponent, propertyKey: "modalVente") => void {
-  throw new Error('Function not implemented.');
-}
-

@@ -30,15 +30,16 @@ class ProduitResource extends JsonResource
     public function produitFormat($resource){
         if ($resource) {
             return [
-                "id" => $resource[0]->id,
-                "libelle"=>$resource[0]->nom,
-                "code"=>$resource[0]->code,
-                "description"=>$resource[0]->description,
-                "photo"=>$resource[0]->photo,
-                // "caracteristiques"=>$resource[0]->caracteristiques,
-                "caracteristiques"=> CaracteristiqueProduitResource::collection($resource[0]->caracteristiques),
-                // "succursales"=>$resource[0]->succursales,
-                "succursales"=>ProduitSuccursaleResource::collection($resource[0]->succursales),
+                "id_produit" => $resource->id,
+                "id_produit_succ" => $resource->succursales[0]->pivot->id ?? null,
+                "libelle"=>$resource->libelle,
+                "code"=>$resource->code,
+                "description"=>$resource->description,
+                "photo"=>$resource->photo,
+                // "caracteristiques"=>$resource->caracteristiques,
+                "caracteristiques"=> CaracteristiqueProduitResource::collection($resource->caracteristiques),
+                // "succursales"=>$resource->succursales,
+                "produit_succursales"=>ProduitSuccursaleResource::collection($resource->succursales),
             ];
         }
         else{

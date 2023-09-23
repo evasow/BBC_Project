@@ -5,12 +5,14 @@
         <div class="m-8 h-1/5 flex justify-between">
             <img class="h-auto max-w-xs" src="../../assets/img/image-removebg-preview (1).png" alt="image description">
             <div class="flex justify-center items-center">
-                <p class="text-3xl text-gray-900 dark:text-white">Stock :</p>
+                <p *ngIf="produitVente.produit_succursales?.length==1" class="text-3xl text-gray-900 dark:text-white">Stock : {{produitVente.produit_succursales![0].quantite_stock}}</p>
+                <p *ngIf="produitVente.produit_succursales?.length!==1" class="text-3xl text-gray-900 dark:text-white">Stock : 0</p>
             </div>
         </div>
         <hr class="h-px m-8 bg-slate-400 border-0 dark:bg-gray-900">
         <div class="relative scroll h-72 overflow-y-auto shadow-md sm:rounded-lg m-8">
             <app-table-vente [infosVente]="infosVente"
+           
              [produitVente]="produitVente"
              (montantTotal)="setMontantTotal($event)">
 
@@ -22,7 +24,7 @@
                 <div class="flex m-8">
                     <button class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white bg-red-600 border border-gray-300 rounded-l-lg     focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button" >Remise</button>
                     <div class="relative w-full">
-                        <input formControlName="remise" type="number" class="text-center block p-2.5 w-24 z-20 text-2xl text-red-600 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-red-600 placeholder:text-center" placeholder="0" >
+                        <input (input)="updateMontant()" formControlName="remise" type="number" class="text-center block p-2.5 w-24 z-20 text-2xl text-red-600 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 placeholder:text-red-600 placeholder:text-center" placeholder="0" >
                     </div>
                 </div>
                 <div class="flex m-8">
@@ -72,7 +74,7 @@
 
             <div  *ngIf="!nonProduit" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <img  src="{{produitVente.photo}}" alt="" />
-                <span *ngIf="produitVente.succursales?.length!==1" class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-700 relative inline-block">
+                <span *ngIf="produitVente.produit_succursales?.length!==1" class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-700 relative inline-block">
                     <span class="relative text-white">rupture de stock</span>
                 </span>
                
@@ -88,7 +90,7 @@
                             <span>{{car.libelle}}: <span class="font-semibold text-gray-900 dark:text-white">{{car.valeur}} {{car.unite}}</span></span>
                         </li>
                     </ul>
-                    <div class="flex justify-end" [class.hidden]="produitVente.succursales?.length!=1">
+                    <div class="flex justify-end" [class.hidden]="produitVente.produit_succursales?.length!=1">
                         <button  data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"  class=" cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Ajouter
                             <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -98,8 +100,8 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-5 scroll h-24 overflow-y-auto grid grid-cols-2 gap-2"*ngIf="!(produitVente.succursales?.length==1 && produitVente.succursales![0].quantite_stock!==0)">
-                <button *ngFor="let succ of produitVente.succursales" href="#" class="block max-w-[10em] p-2 text-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div class="mt-5 scroll h-24 overflow-y-auto grid grid-cols-2 gap-2"*ngIf="produitVente.produit_succursales&&!(produitVente.produit_succursales?.length==1 && produitVente.produit_succursales![0].quantite_stock!==0)">
+                <button *ngFor="let succ of produitVente.produit_succursales" (click)="venteOtherSucc(succ,$event)"  class="block max-w-[10em] p-2 text-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h6 class="mb-1 text-sm font-bold tracking-tight text-gray-900 dark:text-white">{{succ.nom}}</h6>
                     <div>
                         <span class=" text-xs font-bold tracking-tight text-gray-500 dark:text-white">quantite : <span class="text-gray-900">{{succ.quantite_stock}}</span></span><br>
@@ -112,5 +114,6 @@
 </div>
 <app-modal-vente [produitVente]="produitVente" [produitOfSuccursale]="produitOfSuccursale" (produitSender)="ajouterProduit($event)" ></app-modal-vente>
 <app-modal-suivant (venteSender)="ajouterCommande($event)" [infosVente]="infosVente" [montantTotal]="montantTotal"></app-modal-suivant>
-
+<!-- <app-modal-vente-other [produitVente]="produitVente" [produitOfSuccursale]="produitOfSuccursale" (produitSender)="ajouterProduit($event)"></app-modal-vente-other> -->
+<!-- data-modal-target="other-vente-modal" data-modal-toggle="other-vente-modal" -->
 

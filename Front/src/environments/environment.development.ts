@@ -19,6 +19,7 @@ export const environment = {
         ]
     },
     "produitOfSuccursale":{
+        "id": 1,
         "nom": "BBC colobane",
         "prix_gros":1000000,
         "prix_unitaire" :100000,

@@ -21,12 +21,16 @@ constructor(private fb:FormBuilder){}
   formTableVente=this.fb.group({
     quantite:[0],
     prix:[0],
-    montant_total:[0],
+    montant_total:[{value:0,disabled:true}],
   })
 
   updateMontantTotal(event:Event, item:InfosVente){
     let input=event.target as HTMLInputElement
-    this.totalMontant= +input.value*item.prix
+    console.log(item);
+    
+    let totalMontant= +input.value*item.prix
+    this.formTableVente.get('montant_total')?.setValue(totalMontant);
+    console.log(totalMontant);
   }
 
   removeInfVente(item:InfosVente){

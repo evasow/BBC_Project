@@ -34,7 +34,7 @@ class ProduitController extends Controller
                 'description'=>$request->description,
                 'photo'=>$request->photo
             ]);
-    
+
             $produit->succursales()->attach($request->succursaleProd);
     
             $produit->caracteristiques()->attach($request->caracteristiques);
@@ -73,13 +73,13 @@ class ProduitController extends Controller
 
             }, 'caracteristiques'])->where('code', $code)->first();
 
-                return new ProduitResource('',[$produit]);
+                return new ProduitResource('',$produit);
             // $produit = Produit::quantitePositive($ids, $code)->first();
         }
         $produit = Produit::with(['succursales' => function ($q) use ($succ) {
             $q->where('succursale_id', $succ);
         }, 'caracteristiques'])->where('code', $code)->first();
-        return new ProduitResource('',[$produit]) ;
+        return new ProduitResource('',$produit) ;
     }
     /**
      * Update the specified resource in storage.

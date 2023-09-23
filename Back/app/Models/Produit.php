@@ -29,6 +29,6 @@ class Produit extends Model
     public function succursales()
     {
         return $this->belongsToMany(Succursale::class,'produit_succursales')
-                    ->withPivot('quantite_stock','prix_unitaire','prix_gros');
+                    ->withPivot('quantite_stock','prix_unitaire','prix_gros','id');
     }
 }

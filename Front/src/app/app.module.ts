@@ -13,6 +13,7 @@ import { DashbordComponent } from './dashbord/dashbord.component';
 import { ModalVenteComponent } from './container/modal-vente/modal-vente.component';
 import { ModalSuivantComponent } from './container/modal-suivant/modal-suivant.component';
 import { ModalTerminerVenteComponent } from './container/modal-terminer-vente/modal-terminer-vente.component';
+import { ModalVenteOtherComponent } from './modal-vente-other/modal-vente-other.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ModalTerminerVenteComponent } from './container/modal-terminer-vente/mo
     DashbordComponent,
     ModalVenteComponent,
     ModalSuivantComponent,
-    ModalTerminerVenteComponent
+    ModalTerminerVenteComponent,
+    ModalVenteOtherComponent
   ],
   imports: [
     BrowserModule,

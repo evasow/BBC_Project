@@ -23,7 +23,7 @@ class AmiController extends Controller
     {
         //
     }
-
+  
     /**
      * Display the specified resource.
      */
@@ -37,7 +37,7 @@ class AmiController extends Controller
     }
     public function listeSuccursalesWait($id)
     {
-        return Succursale::wait($id)->get();
+        //return Succursale
     }
 
     /**

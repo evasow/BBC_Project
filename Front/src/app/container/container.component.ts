@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ProduitVenteService } from '../shared/service/produit-vente.service';
 import { ProduitLoad } from '../shared/interface/produit-load';
 import { environment } from 'src/environments/environment.development';
@@ -22,6 +22,7 @@ export class ContainerComponent {
   succursale:string ="BBC colobane";
   montantTotal:number =0
 
+  @ViewChild('modalVente') modalVente! : ElementRef
   
 
     constructor(private produitService:ProduitVenteService, private fb:FormBuilder,private commandeService:CommandeService){}
@@ -53,7 +54,7 @@ export class ContainerComponent {
             // if (this.produitOfSuccursale) {
               this.produitVente = data.data[0];
               // this.nonProduit = false
-              this.produitOfSuccursale=this.searchProduitSuccursale(data.data[0].succursales!, this.succursale);
+              this.produitOfSuccursale=this.searchProduitSuccursale(data.data[0].produit_succursales!, this.succursale);
               console.log(this.produitVente);
               // console.log(this.produitOfSuccursale); 
             // }
@@ -66,6 +67,8 @@ export class ContainerComponent {
         console.log(data);
       })
       console.log(commande);
+      this.produitVente.produit_succursales![0].quantite_stock=
+      this.produitVente.produit_succursales![0].quantite_stock-this.infosVente[0].quantite
       
     }
     searchProduitSuccursale(tab:Succursale[], libelle:string){
@@ -94,5 +97,28 @@ export class ContainerComponent {
         console.log(montant);
         
     }
+    venteOtherSucc(succ:Succursale, event:Event){
+      // let button = event.target as HTMLButtonElement;
+      console.log(this.modalVente);
       
+      // this.modalVente.nativeElement.classList.remove("hidden");
+      // this.modalVente.nativeElement.setAttribute("aria-hidden","false");
+
+      console.log(succ);
+    } 
+    updateMontant(){
+      let remise = this.formTotalMontant.get("remise")?.value;
+      let mnt = this.formTotalMontant.get("montant_total")?.value;
+      if (remise) {
+        this.formTotalMontant.get("montant_total")?.setValue(mnt!-(remise/100*mnt!)); 
+      }
+      else{
+        this.formTotalMontant.get("montant_total")?.setValue(mnt!+(remise!/100*mnt!)); 
+      }
+      console.log(remise);
+      console.log(mnt);
+      console.log(mnt!-(remise!*mnt!/100));
+      
+      console.log(mnt);
+    }   
 }
