@@ -31,7 +31,6 @@ export class ModalTerminerVenteComponent {
       "produits_succursale":this.infosVente
     }
     this.venteSender.emit(obj);
-    console.log(obj); 
-    
+    console.log(obj);  
   }
 }

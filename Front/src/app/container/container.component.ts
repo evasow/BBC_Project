@@ -7,6 +7,8 @@ import { InfosVente } from '../shared/interface/infos-vente';
 import { FormBuilder } from '@angular/forms';
 import { Commande } from '../shared/interface/commande';
 import { CommandeService } from '../shared/service/commande.service';
+import { ModalVenteComponent } from './modal-vente/modal-vente.component';
+import { TableVenteComponent } from './table-vente/table-vente.component';
 
 @Component({
   selector: 'app-container',
@@ -22,7 +24,8 @@ export class ContainerComponent {
   succursale:string ="BBC colobane";
   montantTotal:number =0
 
-  @ViewChild('modalVente') modalVente! : ElementRef
+  @ViewChild('modalVente') modalVente! : ModalVenteComponent
+  @ViewChild('tableVente') tableVente! :TableVenteComponent
   
 
     constructor(private produitService:ProduitVenteService, private fb:FormBuilder,private commandeService:CommandeService){}
@@ -69,41 +72,46 @@ export class ContainerComponent {
       console.log(commande);
       this.produitVente.produit_succursales![0].quantite_stock=
       this.produitVente.produit_succursales![0].quantite_stock-this.infosVente[0].quantite
+      this.infosVente=[];
+      this.produitVente=environment.defaulProduit
+      this.formTotalMontant.reset();
       
     }
     searchProduitSuccursale(tab:Succursale[], libelle:string){
 
         return tab.filter(data =>data.nom==libelle)[0]
     }
+
     calculMontantTotal(tab:InfosVente[]){
       return tab.reduce((acc,value)=>{
         return acc + (value.prix*value.quantite);
       },0)
     }
+
     ajouterProduit(produit:InfosVente[])
     {
+      console.log(this.tableVente.formTableVente.get("montant_total")?.value);
       this.infosVente=produit; 
       
       this.formTotalMontant.get('montant_total')?.setValue(this.calculMontantTotal(this.infosVente))
       console.log(produit);
       this.montantTotal=this.formTotalMontant.get('montant_total')?.value!;
+      
     }
     validerMontant(){
-      console.log(this.formTotalMontant);
-      
-      
+      console.log(this.formTotalMontant); 
     }
     setMontantTotal(montant:number){
         console.log(montant);
         
     }
     venteOtherSucc(succ:Succursale, event:Event){
-      // let button = event.target as HTMLButtonElement;
-      console.log(this.modalVente);
+      let divModal = this.modalVente.modalVente.nativeElement;
+      console.log(divModal);
       
-      // this.modalVente.nativeElement.classList.remove("hidden");
-      // this.modalVente.nativeElement.setAttribute("aria-hidden","false");
-
+      divModal.classList.remove("hidden");
+      divModal.setAttribute("aria-hidden","false");
+      this.produitOfSuccursale=succ
       console.log(succ);
     } 
     updateMontant(){
@@ -115,10 +123,8 @@ export class ContainerComponent {
       else{
         this.formTotalMontant.get("montant_total")?.setValue(mnt!+(remise!/100*mnt!)); 
       }
-      console.log(remise);
-      console.log(mnt);
-      console.log(mnt!-(remise!*mnt!/100));
-      
-      console.log(mnt);
+      // console.log(remise);
+      // console.log(mnt);
+      // console.log(mnt!-(remise!*mnt!/100));
     }   
 }

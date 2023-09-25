@@ -2,25 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\produitSuccursale;
+use App\Http\Resources\ProduitSuccursaleCollection;
+use App\Models\ProduitSuccursale;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProduitSuccursaleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        
+        return new ProduitSuccursaleCollection(
+            ProduitSuccursale::with('produit')
+            ->where('succursale_id',$id)->paginate(2));
+            
     }
 
     /**
@@ -35,14 +33,6 @@ class ProduitSuccursaleController extends Controller
      * Display the specified resource.
      */
     public function show(produitSuccursale $produitSuccursale)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(produitSuccursale $produitSuccursale)
     {
         //
     }

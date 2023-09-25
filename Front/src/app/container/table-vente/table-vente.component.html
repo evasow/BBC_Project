@@ -33,7 +33,7 @@
                     <input type="number" (input)="updateMontantTotal($event, item)" value="{{item.quantite}}" id="first_product" class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
                 </td>
                 <td class="px-6 py-4">
-                    <input type="text" formControlName="montant_total" [value]="item.quantite*item.prix" class="border-none w-24" >
+                    <input type="text"  value="{{item.quantite*item.prix}}" class="border-none w-24" >
                 </td>
                 <td class="px-6 py-4">
                     <button (click)="removeInfVente(item)" class="font-medium text-red-600 hover:underline">Supprimer</button>

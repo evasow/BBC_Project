@@ -13,6 +13,7 @@ export class TableVenteComponent {
   @Input() produitVente!:ProduitLoad
 
   @Output() montantTotal=new EventEmitter<number>();
+  @Output() produitSuppSender=new EventEmitter<InfosVente[]>()
   // montantTotal:number=this.calculMontantTotal();
 
 constructor(private fb:FormBuilder){}
@@ -37,5 +38,6 @@ constructor(private fb:FormBuilder){}
     console.log(item);
   
     this.infosVente= this.infosVente.filter(elt=>elt !==item);
+    this.produitSuppSender.emit(this.infosVente)
   }
 }

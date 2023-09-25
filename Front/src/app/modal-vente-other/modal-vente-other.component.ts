@@ -71,6 +71,7 @@ export class ModalVenteOtherComponent {
     
     this.tabInfVente.push(infVal);
     this.produitSender.emit(this.tabInfVente)
+    this.formInfosVente.reset();
     console.log(infVal);
  
   }

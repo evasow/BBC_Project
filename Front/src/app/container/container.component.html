@@ -14,7 +14,7 @@
             <app-table-vente [infosVente]="infosVente"
            
              [produitVente]="produitVente"
-             (montantTotal)="setMontantTotal($event)">
+             (montantTotal)="setMontantTotal($event)" #tableVente>
 
             </app-table-vente>
         </div>
@@ -112,7 +112,7 @@
         </div>
     </div>
 </div>
-<app-modal-vente [produitVente]="produitVente" [produitOfSuccursale]="produitOfSuccursale" (produitSender)="ajouterProduit($event)" ></app-modal-vente>
+<app-modal-vente #modalVente [produitVente]="produitVente" [produitOfSuccursale]="produitOfSuccursale" (produitSender)="ajouterProduit($event)" ></app-modal-vente>
 <app-modal-suivant (venteSender)="ajouterCommande($event)" [infosVente]="infosVente" [montantTotal]="montantTotal"></app-modal-suivant>
 <!-- <app-modal-vente-other [produitVente]="produitVente" [produitOfSuccursale]="produitOfSuccursale" (produitSender)="ajouterProduit($event)"></app-modal-vente-other> -->
 <!-- data-modal-target="other-vente-modal" data-modal-toggle="other-vente-modal" -->

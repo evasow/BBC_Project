@@ -1,0 +1,108 @@
+<div class="bg-gray-400 border h-screen flex-col flex justify-center items-center">
+    <div class="text-xl m-3 font-bold flex justify-between content-between w-3/4">
+        <h1>Nombre de produit :10</h1>
+        <h1>Quantité en stock :10</h1>
+    </div>
+    <div class="w-3/4 border bg-gray-200 shadow rounded">
+        <div class="grid gap-6 mb-6 md:grid-cols-3 m-8">
+            
+            <div class="flex gap-3 items-center">
+                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rechercher par :</label>
+                <select id="countries" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Nom de produit</option>
+                </select>  
+            </div>
+            <!-- <form class="flex items-center">    -->
+                <div class="flex">
+                    <input type="text" (input)="searchProduit($event)" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="saisir votre recherche..." required>
+                    <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        rechercher
+                    </button>
+                </div>
+                <div>
+                    <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-black bg-white-700 rounded-lg border border-gray-900 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Imprimer
+                    </button>
+                    <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-gray-700 rounded-lg border border-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Etat
+                    </button>
+                </div>
+            <!-- </form> -->
+        </div>
+        <div>
+        <div class="flex gap-4 items-center m-8">
+            <label for="">show</label>
+            <select id="countries" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>Choose a country</option>
+            </select>  
+            <label for="">entries</label>
+        </div>
+        <div class="relative overflow-x-auto shadow-md m-8 sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <caption></caption>
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Code
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Produit
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Categorie
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Prix
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Quantité
+                        </th>
+                        <th scope="col"  class="px-6 py-3 text-center">
+                            <button type="submit" class="p-2 ml-2 text-sm font-medium text-white bg-green-500 rounded-lg border border-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Ajouter
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of listeProduit" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{product.produit.code}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{product.produit.libelle}}
+                        </td>
+                        <td class="px-6 py-4">
+                            Laptop
+                        </td>
+                        <td class="px-6 py-4">
+                            {{product.prix_unitaire}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{product.quantite_stock}}
+                        </td>
+                        <td class="text-center">
+                            <button type="submit" class="p-2 ml-2 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Détails
+                            </button>
+                            <button type="submit" class="p-2 ml-2 text-sm font-medium text-white bg-yellow-400 rounded-lg border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Editer
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="flex justify-end m-8">
+            <nav aria-label="Page navigation example ">
+                <ul class="inline-flex -space-x-px text-sm ">
+                <li *ngFor="let link of links">
+                    <a  [innerHTML]="link.label" [class.bg-blue-300]="link.active" (click)="paginate(link.url)"
+                        class="cursor-pointer flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                </li>
+                </ul>
+            </nav>
+        </div>
+        </div>
+    </div>
+</div>

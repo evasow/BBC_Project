@@ -35,7 +35,7 @@ class CommandeController extends Controller
             unset($object['produit']);
             return $object;
         },$request->produits_succursale);
-
+        
         $commande->produits_succursale()->attach($produits_succursale);
 
         foreach ($produits_succursale as $value) {

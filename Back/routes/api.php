@@ -11,6 +11,8 @@ use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\SuccursaleController;
 use App\Http\Controllers\CaracteristiquesController;
+use App\Http\Controllers\ProduitSuccursaleController;
+use App\Models\ProduitSuccursale;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,7 @@ Route::apiResource("/users",UserController::class);
 Route::apiResource('/caracteristique',CaracteristiquesController::class);
 Route::apiResource('/produits',ProduitController::class);
 Route::get('/produits/{code}/succursale/{succ}',[ProduitController::class,'searchProduct']);
+Route::get('/produit/succursale/{id}',[ProduitSuccursaleController::class,'index']);
 
 Route::apiResource('/unite',UniteController::class);
 Route::apiResource("/commandes",CommandeController::class);
