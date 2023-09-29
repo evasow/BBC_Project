@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -21,15 +22,15 @@ class LoginController extends Controller
         $user = User::where("login", $request->login)->first();
         
         if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                "message" => "Identifiant ou mot de passe incorrect"
-            ]);
+            return [
+                'message' => 'Identifiant ou password Incorrecte'
+            ];
         }
         $token = $user->createToken("api_token");
         
         return [
-            'token' => $token->plainTextToken,
-            'user' => $user,
+            'data' => [$token->plainTextToken,new UserResource($user)],
+            'succes' => true,
             'message' => 'connecté'
         ];
        

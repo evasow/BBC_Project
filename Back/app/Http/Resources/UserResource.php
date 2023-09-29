@@ -13,18 +13,15 @@ class UserResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public $message;
-    public function __construct($message, $resource=[]) {
-        $this->resource = $resource;
-        $this->message = $message;
-    }
 
     public function toArray(Request $request): array
     {
         return [
-            'message' => $this->message,
-            'data' => [$this->resource],
-            'statut'=>Response::HTTP_OK
+            'nomComplet' => $this->nomComplet,
+            'login' => $this->login,
+            'succursale'=>$this->succursale->nom,
+            'succursale_id'=>$this->succursale->id,
+
         ];
     }
 }

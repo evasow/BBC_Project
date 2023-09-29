@@ -4,12 +4,16 @@ import { DashbordComponent } from './dashbord/dashbord.component';
 import { ContainerComponent } from './container/container.component';
 import { ProduitVenteComponent } from './produit-vente/produit-vente.component';
 import { ListProduitComponent } from './list-produit/list-produit.component';
+import { LoginComponent } from './login/login.component';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
-  {path:'dashboard', component: DashbordComponent},
-  {path:'vente', component:ContainerComponent},
-  {path:'produit', component:ProduitVenteComponent},
-  {path:'liste-produits', component:ListProduitComponent},
+  {path:'dashboard', component: DashbordComponent, canActivate:[authGuard]},
+  {path:'vente', component:ContainerComponent,canActivate:[authGuard]},
+  {path:'produit', component:ProduitVenteComponent,canActivate:[authGuard]},
+  {path:'liste-produits', component:ListProduitComponent,canActivate:[authGuard]},
+  {path:'', component:LoginComponent},
+
 
 
   

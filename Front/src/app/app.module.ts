@@ -16,6 +16,10 @@ import { ModalTerminerVenteComponent } from './container/modal-terminer-vente/mo
 import { ModalVenteOtherComponent } from './modal-vente-other/modal-vente-other.component';
 import { ListProduitComponent } from './list-produit/list-produit.component';
 
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -30,13 +34,16 @@ import { ListProduitComponent } from './list-produit/list-produit.component';
     ModalTerminerVenteComponent,
     ModalVenteOtherComponent,
     ListProduitComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
 
   ],
   providers: [],

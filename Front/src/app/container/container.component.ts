@@ -9,6 +9,8 @@ import { Commande } from '../shared/interface/commande';
 import { CommandeService } from '../shared/service/commande.service';
 import { ModalVenteComponent } from './modal-vente/modal-vente.component';
 import { TableVenteComponent } from './table-vente/table-vente.component';
+import { ToastrService } from 'ngx-toastr';
+import { User } from '../shared/interface/user';
 
 @Component({
   selector: 'app-container',
@@ -24,11 +26,13 @@ export class ContainerComponent {
   succursale:string ="BBC colobane";
   montantTotal:number =0
 
+  user:User=JSON.parse(localStorage.getItem('user')!);
+
   @ViewChild('modalVente') modalVente! : ModalVenteComponent
   @ViewChild('tableVente') tableVente! :TableVenteComponent
   
 
-    constructor(private produitService:ProduitVenteService, private fb:FormBuilder,private commandeService:CommandeService){}
+    constructor(private toastr: ToastrService, private produitService:ProduitVenteService, private fb:FormBuilder,private commandeService:CommandeService){}
 
     formTotalMontant=this.fb.group({
       remise:[],
@@ -36,10 +40,14 @@ export class ContainerComponent {
     })
 
     ngOnInit(){
+      // this.showSuccess('azertyu','awa')
       this.produitVente=environment.defaulProduit;
       this.produitOfSuccursale=environment.produitOfSuccursale
     }
-
+    
+    showSuccess(message:string,title:string) {
+      this.toastr.success(message, title);
+    }
     searchProduitByCode(event:Event)
     {
       let input=event.target as HTMLInputElement;
@@ -48,7 +56,7 @@ export class ContainerComponent {
       this.produitOfSuccursale=environment.produitOfSuccursale
       this.produitVente=environment.defaulProduit;
       if (input.value.length >3) {
-        this.produitService.search(environment.url+'/produits/'+input.value+'/succursale/1').subscribe(data =>{;
+        this.produitService.search(environment.url+'/produits/'+input.value+'/succursale/'+this.user.succursale_id).subscribe(data =>{;
           console.log(data)
           if (data.data[0]==null) {
             this.nonProduit = true;
@@ -68,6 +76,7 @@ export class ContainerComponent {
     ajouterCommande(commande:Commande){
       this.commandeService.post(commande).subscribe(data =>{
         console.log(data);
+        this.showSuccess(data.message,'Ajout Commande')
       })
       console.log(commande);
       this.produitVente.produit_succursales![0].quantite_stock=

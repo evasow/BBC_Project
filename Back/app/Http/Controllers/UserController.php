@@ -31,7 +31,7 @@ class UserController extends Controller
             'succursale_id'=>$request->succursale_id
         ]);
         
-        return new UserResource('User ajouté avec succès !',$user);
+        return new UserResource($user);
     }
 
     /**
