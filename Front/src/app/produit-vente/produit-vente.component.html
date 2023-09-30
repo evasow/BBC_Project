@@ -1,65 +1,68 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="h-screen  flex  flex-col justify-center items-center bg-gray-200">
+<div class="h-[95vh]  flex  flex-col justify-center items-center bg-gray-200">
     <!-- <h1 class="text-5xl m-3">Ajout de produits</h1> -->
 
-<div class="border w-[140vh] p-8 bg-white shadow">
+<div class="border w-[140vh]  p-8 bg-white shadow">
     <h1 class="text-2xl mb-6 font-bold">Nouveau Produit</h1>
-    <hr class="mb-8">
-    <form >
+    <hr class="mb-6">
+    <form [formGroup]="formProduits" (submit)="onSubmitProduct()" >
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Article</label>
-                <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Entrer le libelle" required>
+                <input formControlName="libelle" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Entrer le libelle" required>
             </div>
             <div class="grid gap-2 mb-6 grid-cols-2">
                 <div>
                     <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prix achat</label>
-                    <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Entrer le prix" required>
+                    <input formControlName="prix_unitaire" type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Entrer le prix" required>
                 </div>
                 <div>
                     <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantite stock</label>
-                    <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
+                    <input formControlName="quantite_stock" type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required>
                 </div>
             </div>
             <div>
                 <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Marque</label>
-                <select name="" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select formControlName="marque" name="" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="" selected disabled>Choisir une marque</option>
                 </select>
             </div>  
             <div>
                 <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categorie</label>
-                <select name="" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select formControlName="categorie" name="" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="" selected disabled>Choisir une Categorie</option>
                 </select>
             </div>
         </div>
         <div class="mb-16 flex justify-center items-center ">
-            <input disabled type="text" id="text" class="w-[12vw] h-24 bg-gray-200 border border-red-500 text-gray-900 text-5xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:text-center placeholder:text-5xl placeholder:text-black" placeholder="000000" required>
+            <input formControlName="code"  type="text" id="text" class="w-[12vw] h-24 bg-gray-200 border border-red-500 text-gray-900 text-5xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:text-center placeholder:text-5xl placeholder:text-black" placeholder="000000" required>
         </div> 
-        <div class="grid gap-2 mb-6 grid-cols-4">
-            <div>
-                <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-                <select name="" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="" selected disabled>Choisir une Couleur</option>
-                </select>
-            </div>
-            <div>
-                <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
-                <select name="" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="" selected disabled>rouge </option>
-                </select>
-            </div>
-            <div class="mt-7">
-                <button type="submit" class="text-red-700 bg-white-700 border border-red-500 hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">X</button>
+        <div class="flex justify-between border" >
+            <div formArrayName="caracteristiques" class="border scroll h-52 overflow-y-auto">
+                <div class="grid gap-2 mb-6 grid-cols-4 border" *ngFor="let car of caracteristiques.controls;   let i=index"
+                    [formGroupName]="i">
+                    <div>
+                        <select formControlName="caracteristiques_id" name="" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="" selected disabled>Choisir une Couleur</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select formControlName="valeur" name="" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="" selected disabled>rouge </option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <button (click)="removeCaracteristique(i)" type="button" class="text-red-700 bg-white-700 border border-red-500 hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">X</button>
+                    </div>
+                </div>
             </div>
             <div>
                 <input type="file" name="" class="hidden" id="image">
                 <label for="image">
                     <img class="h-[20vh] max-w-xs cursor-pointer" src="https://img.freepik.com/vecteurs-premium/image-icon-vector-illustration-photo-on-isolated-background-gallery-sign-concept_993513-11.jpg" alt="image description">
                 </label>
-                <button type="submit" class="text-blue-700 bg-white-700 border border-blue-500 hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter une caracteristique</button>
+                <button (click)="addCaracteristique()" type="button" class="text-blue-700 bg-white-700 border border-blue-500 hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter une caracteristique</button>
             </div>
         </div>
         <hr class="mt-14">
